@@ -19,9 +19,9 @@ Download link:
 
 ### Instruction:
 
-   1. The two main python codes and /itools need be save in one folder.
+   1. The two main python codes and /itools need be save in one folder. a. Install mtpy: https://pypi.org/project/mtpy/. b. Download and setup Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html 
 
-   2. _forWeb_DataGen_1.py_ are used to training dataset generation, and are saved automatically after validation. Some parameters at the beginning of code are default, user can change it as wish.
+   2. _forWeb_DataGen_1.py_ are used to generate the training dataset, and are saved automatically after validation. Some parameters at the beginning of code are default, user can change it as wish.
 
    3. _forWeb_Training_.py_ are used to training model, and used it to predict the features of resistivity. All of the data should be saved in one folder, code will run through each of the data and save all of the results in new folder individually.
 
