@@ -3,7 +3,7 @@
 
 # 1D MT forward modeling with Occam1D
 
-Download link-note:
+### Download link-note:
 
 * The aim of this inversion study is to train a model for retriving subsurface resistivity distribution using deep learning framework.    
 
