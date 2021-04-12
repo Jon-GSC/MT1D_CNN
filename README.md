@@ -21,9 +21,9 @@
 
    1. The two main python codes and /itools need be save in one folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html 
 
-   2. _forWeb_Datagenerate.py_ are used to generate the training dataset, and saved automatically after validation. Some parameters at the beginning of code are default, user can change_ it as wish.
+   2. _forWeb_Datagenerate.py_ are used to generate the training dataset, and saved automatically after validation. Some parameters at the beginning of code are default, user can change it as wish.
 
-   3. _forWeb_MT1D_cnn.py are used to training model, and used it to predict the features of resistivity. All of the data should be saved in one folder, code will run through each of the data and save all of the results in new folder individually.
+   3. _forWeb_MT1D_cnn.py are used to training model, and used it to predict the features of resistivity. All of the data should be saved in one folder, code will run through each of the data and save all of the results in same folder.
 
 
 ### Hardware tested: 
