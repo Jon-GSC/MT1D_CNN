@@ -38,7 +38,7 @@ if True:   #create the training dataset for cnn model
         os.mkdir(savepath_d)
 
     ocd = occam1d.Data()
-    ocd.write_data_file(edi_file=edi_file, mode='det',save_path=savepath, res_errorfloor=4,phase_errorfloor=2, remove_outofquadrant=True)
+    ocd.write_data_file(edi_file=edi_file, mode='det',save_path=savepath, res_errorfloor=4,phase_errorfloor=2, remove_outofquadrant=True) 
     ocm = occam1d.Model(n_layers=n_layers, target_depth=50000,bottom_layer=110000,z1_layer=20)
     ocm.write_model_file(save_path=savepath)
     ocs = occam1d.Startup(data_fn=ocd.data_fn,model_fn=ocm.model_fn,max_iter=1,target_rms=0.0)
