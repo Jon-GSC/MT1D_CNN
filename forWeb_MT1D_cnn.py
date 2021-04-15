@@ -1,7 +1,7 @@
 # Clearup concised version of cnn-inversion for MT data, 2021-04-09
 # install mtpy, https://mtpy2.readthedocs.io/en/develop/index.html
 # Need download open-source package Occam1D and set the running path.
-# Keras2.4.3 is used. Please contact jon.liu@canada.ca if there is any bugs.
+# Keras version 2.4.3 is used. Please contact jon.liu@canada.ca if there is any bugs.
 #
 #-----------------------------------------------------------------------------------------------------------------------
 import os
@@ -29,9 +29,9 @@ edi_path = '~/edi'
 fold_train = 'train_unet'
 mt_obj = MT(edi_file)
 
-n_layers = 49   #input layers
+n_layers = 49     #input layers
 input_size = 128  #number of frequency
-epochs = 10
+epochs = 150      #maximum iteration
 batch_size = 16
 version = 0          # test version
 iflag = [ 1, 2, 3  ]
