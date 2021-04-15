@@ -13,7 +13,7 @@ sns.set_style("white")
 from scipy.interpolate import interp1d, interp2d, splev, splrep, Rbf, InterpolatedUnivariateSpline
 from scipy.spatial import Delaunay
 import keras
-from keras.layers import Input,Dropout,BatchNormalization,Activation,Add,Lambda,Flatten,Dense,Reshape
+from keras.layers import Dropout,Add,Lambda,Flatten,Dense,Reshape
 from keras import backend as K
 from keras.regularizers import l2
 from keras import optimizers
