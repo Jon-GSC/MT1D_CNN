@@ -18,12 +18,14 @@
 
 ### Instruction:
 
-   1. The two main python codes and /itools need be save in one folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html 
+   1. The three main python codes and /itools need be save in one folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html, the enclosed Occam1DCSEM in /itools has been tested in Ubuntu operating system. User might need compile the Occam Fortran source for different operating environments.
 
-   2. _forWeb_Data_generate.py_ are used to generate the training dataset, and saved automatically after validation. Some parameters at the beginning of code are default, user can change it as wish.
+   2. _forWeb1_Data_generate.py_ is used to generate the training dataset, and saved automatically in two folders. Some parameters at the beginning of code are default, user can change it as wish.
 
-   3. _forWeb_MT1D_cnn.py_ are used to training model, and used it to predict the features of resistivity. All of the data should be saved in one folder, code will run through each of the data and save all of the results in same folder.
+   3. _forWeb2_Model_training.py_ is used to create the model, and predict the resistivity of evaluation set. All of the data should be saved in one folder, code will run through each of the data and save all of the results in same folder.
 
+   4. _forWeb3_Prediction.py_ is used for predicting of real '.edi' data, and plot figures of result.
+   
 
 ### Hardware tested: 
 
