@@ -1,5 +1,5 @@
 # MT1D_CNN
-1D inversion study with CNN model.  
+1D inversion study with CNN model.
 
 # 1D MT forward modeling with Occam1D
 
@@ -9,12 +9,11 @@
 
 ### Requirements: 
 
-* Install python 3.6/newer and anaconda packages: conda install keras-2.4.3, tensorflow-2.3.1, scikit-image, tqdm, pandas, numpy, seaborn, MTpy libraries.
-
+* Install python 3.6/newer and anaconda packages: conda install keras-2.4.3, tensorflow-2.3.1, scipy, scikit-image, tqdm, pandas, numpy, seaborn, shutil, matplotlib, MTpy etc. libraries.
 
 ### Dataset: 
 
-* The original dataset of apparent resistivity and phase are simulated and saved as input data. The loaded data are used for demonstration purpose, the default frequency range and size is 128. During the training, the dataset are split into training and validation groups. 
+* The original dataset of apparent resistivity and phase are simulated and saved as input data. The loaded data are used for demonstration purpose, the default frequency range and size is 128. During the training, the dataset are split into training and validation sets. 
 
 
 ### Instruction:
