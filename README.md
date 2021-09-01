@@ -18,13 +18,13 @@
 
 ### Instruction:
 
-   1. The three main python codes and _/itools_ need be save in same folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html (optional), the enclosed Occam1DCSEM EXE in _/itools_ has been tested in Ubuntu operating system. User might need compile the Occam Fortran source for different operating environments.
+   1. The three main python codes and _/itools_, _/edi_data_ need be save in same folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html (optional), the enclosed Occam1DCSEM EXE in _/itools_ has been tested in Ubuntu operating system. User might need compile the Occam Fortran source for different operating environments.
 
    2. _forWeb1_Data_generate.py_ is used to generate the training dataset, and saved automatically in two folders: _data_ and _mask_. Some parameters at the beginning of code are default, user can change it as wish.
 
    3. _forWeb2_Model_training.py_ is used to create the model, and predict the resistivity of evaluation set. All of the data should be saved in one folder, code will run through each of the data and save all of the results in same folder.
 
-   4. _forWeb3_Prediction.py_ is used for predicting of real '.edi' data, and plotting figures. The 'plc002.edi' in _itools_ is real data for testing purpose. User can add edi filename to the _slst_ list without other change. The output will be save in folder _save_plot_0_.
+   4. _forWeb3_Prediction.py_ is used for predicting of real '.edi' data, and plotting figures. The 'plc002.edi' in _edi_data_ is real data for testing purpose. User can add edi file to the folder _edi_data_ without other change. The output will be save in folder _save_plot_0_.
    
    For pilot running, user does not need change any parameters. The code should run without any error if environment setting is correct. Please contact at following email address if any bugs popup.
 
