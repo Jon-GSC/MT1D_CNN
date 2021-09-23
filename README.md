@@ -45,3 +45,7 @@
 
 * MT1D_CNN used open source codes and library from github, google, kaggle, and open-sourced geophysical inversion packages mtpy and occam1d. Please cite the related references in your publications.
  
+ 
+ 
+![plotMzig_94](https://user-images.githubusercontent.com/39324742/134573289-c75ca6e1-f622-4fe1-8d02-2e4cfbf67c3a.png)
+
