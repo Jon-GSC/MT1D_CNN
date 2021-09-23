@@ -1,41 +1,35 @@
-#load functions for cnn training and plot.
+#functions for cnn training and plot.
 #
 import os
 import numpy as np
 import six
-
 import matplotlib.pyplot as plt
-import matplotlib.tri as tri
 plt.style.use('seaborn-white')
 import seaborn as sns
 sns.set_style("white")
-
-from scipy.interpolate import interp1d, interp2d, splev, splrep, Rbf, InterpolatedUnivariateSpline
+from scipy.interpolate import interp1d, InterpolatedUnivariateSpline
 from scipy.spatial import Delaunay
-import keras
 from keras.layers import Dropout,Add,Lambda,Flatten,Dense,Reshape
 from keras import backend as K
 from keras.regularizers import l2
-from keras import optimizers
 from keras.engine.topology import Input
 from keras.engine.training import Model
-from keras.layers.convolutional import Conv1D, UpSampling1D, Conv2DTranspose
-from keras.layers.core import Activation, SpatialDropout2D
+from keras.layers.convolutional import Conv1D, Conv2DTranspose
+from keras.layers.core import Activation
 from keras.layers.merge import concatenate,add
 from keras.layers.normalization import BatchNormalization
 from keras.layers.pooling import MaxPooling1D
 from keras.losses import binary_crossentropy
-
 import tensorflow as tf
 
 CHANNEL_AXIS = 2
 input_size = 256
 #-----------------------------------------------------------------------------------------------------------------------
 #Params and helpers
-def exp10(my_list):  #
+def exp10(my_list):
     return [ 10**x for x in my_list ]
 
-def Data_Augumentation(Depth, x_train, y_train):  #
+def Data_Augumentation(Depth, x_train, y_train):
     d_size = x_train.shape
 
     x_train_ex = np.empty([0,input_size])
@@ -179,7 +173,6 @@ def get_iou_vector(A, B):
 def my_iou_metric(label, pred):
     return tf.compat.v1.py_func(get_iou_vector, [label, pred > 0.05], tf.float64)
 
-# loss functions
 def dice_coef(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred = K.cast(y_pred, 'float32')
@@ -204,11 +197,11 @@ def rmse(y_true, y_pred):
 def nrmse(y_true, y_pred):
     """ Normalized Root Mean Squared Error """
     # normalized by corelation?
-    return rmse(y_true, y_pred) / (K.max(y_true) - K.min(y_true)) #/ corrcoef0   #??
+    return rmse(y_true, y_pred) / (K.max(y_true) - K.min(y_true))
 
 def rmse_m(y_true, y_pred):
     """ Normalized Root Mean Squared Error plus minimum model """
-    return rmse(y_true, y_pred) + rmse(y_pred,0.0)/50/10   # add model-minimum,
+    return rmse(y_true, y_pred) + rmse(y_pred,0.0)/50/10
 
 def root_mean_squared_error(y_true, y_pred):
     return K.sqrt(K.mean(K.square(y_pred - y_true)))
@@ -340,11 +333,9 @@ def flatten_binary_scores(scores, labels, ignore=None):
 
 def lovasz_loss(y_true, y_pred):
     y_true, y_pred = K.cast(K.squeeze(y_true, -1), 'int32'), K.cast(K.squeeze(y_pred, -1), 'float32')
-    # logits = K.log(y_pred / (1. - y_pred))
-    logits = y_pred  # Jiaxin
+    logits = y_pred
     loss = lovasz_hinge(logits, y_true, per_image=True, ignore=None)
     return loss
-
 
 # ResNet 34
 # https://github.com/raghakot/keras-resnet/blob/master/resnet.py
@@ -624,7 +615,7 @@ def remove_files(images_path_tmp):
         for name in files:
             os.remove(os.path.join(root, name))
 
-def read_startup_0(startup_fn):   # edited from mtpy
+def read_startup_0(startup_fn):   # edited from mtpy by Jon
     """
     reads in a 1D input file
     Arguments:
@@ -751,7 +742,7 @@ def transfer2occam_jon_1(input_size,resp_path0,savepath1,appres,phase):
     nf = len(freq0)
     dlines.append('# Frequencies:   {0}\n'.format(nf))
     for fre_temp in freq0:
-        dlines.append(str(fre_temp)+'\n')   # append frequency
+        dlines.append(str(fre_temp)+'\n')
     # needs a receiver to work so put in a dummy one
     dlines.append('# Receivers: 1 \n')
     dlines.append('0 0 0 0 0 0 \n')
@@ -842,9 +833,9 @@ def read_resp_file_0(input_size=128,resp_fn=None):      # edited from mtpy
     f1d2 = interp1d(freq, np.array(phase_te), kind='linear',fill_value='extrapolate')
     phase_te = f1d2(freq0)
 
-    appres_i = res_te.tolist()  # .
-    phase_i = phase_te.tolist()  # .
-    return appres_i,phase_i   #return app-res and phase
+    appres_i = res_te.tolist()  #
+    phase_i = phase_te.tolist()  #
+    return appres_i,phase_i,freq0   #return app-res and phase, frequency
 
 def calculate_misfit(input_size=128,resp_fn=None):
     mode = 'det'
@@ -891,9 +882,7 @@ def calculate_misfit(input_size=128,resp_fn=None):
     return misfit
 
 
-def res_generator_0(n_layer,ns=10):   #generate resistivity model
-    nseed = np.random.randint(888)
-    np.random.seed(nseed)
+def res_generator_0(n_layer,ns=10):
     icase = np.random.randint(2,4)
     if icase==1:
         res_i = 2.5 + 2.25*np.random.randn(n_layer-1)
@@ -936,7 +925,7 @@ def plot_M(fn_model,res_model):
 
 
 def smooth(x, window_len=11, window='hanning'):   # smooth test
-    #  https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html
+    # source: https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html
     """smooth the data using a window with requested size.
     This method is based on the convolution of a scaled window with the signal.
     The signal is prepared by introducing reflected copies of the signal
@@ -1011,35 +1000,13 @@ def savgol_smooth_Jon_0(train_data0):
             train_data0[i] = savgol_filter(train_data0[i], iwin, iorder)
     return train_data0
 
-def savgol_smooth_Jon_1(input0):
-    from scipy.signal import savgol_filter
-    iwin0 = [5,9,13,17,23,31,39,49,59,69]
-    iorder = 3
-    for iwin in iwin0:
-        input0 = savgol_filter(input0, iwin, iorder)
-    return input0
-
-def savgol_smooth_Jon_2(input0):
-    from scipy.signal import savgol_filter
-    iwin0 = np.linspace(5,29,7,dtype=int)  #
-    iorder = 3
-    output = []
-    for i0 in range(300):
-        iwin1 = sorted(set(np.random.choice(iwin0,6)))
-        temp0 = input0.reshape(-1)
-        for iwin in iwin1:
-            temp0 = savgol_filter(temp0, iwin, iorder)
-        output.append(temp0)
-    return np.array(output)
-
 def savgol_smooth_Jon_3(input0):
     from scipy.signal import savgol_filter
-    iwin0 = np.linspace(5,69,17,dtype=int)  #
+    iwin0 = np.linspace(5,69,17,dtype=int)
     iorder = 3
-    ntimes = 300
     output = []
-    for i0 in range(ntimes):
-        iwin1 = sorted(set(np.random.choice(iwin0,8)))
+    for i0 in range(100):
+        iwin1 = sorted(set(np.random.choice(iwin0, np.random.randint(1,9))))
         temp0 = input0.reshape(-1)
         for iwin in iwin1:
             temp0 = savgol_filter(temp0, iwin, iorder)
