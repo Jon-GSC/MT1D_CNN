@@ -1,0 +1,106 @@
+!
+! Occam1DCSEM:
+!
+! 3.10      March 22, 2011      KK          Added support for model bounds using nonlinear transformations.  Supports the Habashy 
+!                                           and Abubakar (2004) exponential transformation and a new one that I created to have a
+!                                           flat sensitivity scaling in the pass-band between the bounds. Both seem to work well but 
+!                                           have only been moderately tested here so far.
+!
+! 3.9       March 2, 2011       DM, KK      Fix to allow Min Norm inversion to have 2nd stage in Occam procedure.
+!                                           Fixed Lapack calls to use correct precision routines depending on RealPrec parameter. 
+!
+!
+! CSEM1D:
+!
+! 3.13, March-Dec, 2010     DGM added several roughness types, merged various codes.
+!
+! 3.12, March 26, 2010.     Minor tweaks for roughnessType parameter, added option for
+!                           minimum gradient support regularization.
+! 
+! 3.11, Feb 05, 2010.       David Myer added support for finite dipole length.
+! 
+! 3.10, January 21, 2010.   Fixed a minor bug affecting only joint CSEM/MT modeling.
+!                           Thanks to DGM for identifying the problem.
+!
+! 3.9, October 20, 2009.    Minor changes, added parameter for selecting
+!                           which svd routine to use since svd() occasionally gives wrong svd.
+!
+! 3.8, Aug 2009.  DGM       Lots of memory was NOT being deallocated before exit.
+!                           Added provision in Occam for deallocateFwd subroutine
+!                           and coded here.  Also rearranged some bits of code to allow
+!                           for a MatLab interface to the forward and inversion codes.
+!                           Since the MatLab interface is not a separate executable,
+!                           memory must be very carefully managed.
+!                                   
+! 3.7, May 8, 2009.         A few minor changes to accomodate some Occam.f90 updates.
+!
+! 3.6, January, 2009.       Added Steve's polarization ellipse code for 
+!                           horizontal E and B data.
+!
+! 3.5  December, 2008.      Fixed a few things that were not compliant with the
+!                           Fortran2003 standard.  Updated model and data file 
+!                           formats.  Add support for RealPrec parameter defined in 
+!                           module Occam_RealPrecision.
+! 
+! 3.4  November, 2008.      Added in support for ascii data types in data 
+!                           file parameter table. Model files now can 
+!                           use ? for flagging inversion layers (or use -1). 
+!                           Added support for phase data and option 
+!                           for specifying Phase Lag or Phase Lead conventions.
+! 
+! 3.3  September 19, 2008.  Switched to R.L. Parker's svd routine for OPRA.
+!
+! 3.2  September 17, 2008.  Cleaned up a few things, fixed a bug in the 
+!                           rotation code.
+!
+! 3.1   September 4, 2008.  Added Rx-Tx transformations, cleaned up 
+!                           various sections of the code in preparation  
+!                           for distribution.
+!
+! 3.0   August 2008.        Added orthogonal Procrustes method to estimate  
+!                           3D receiver orientations, if requested.
+!
+! 2.0                       Added 1D MT for joint 1D CSEM-MT inversion.
+!
+! 1.0   March, 2008.        1D CSEM inversion using Dipole1D.f90.
+!
+!
+!
+!
+! Dipole1D:
+!
+!
+! Version 7.3  February 10, 2010    Added Gauss quadrature option for finite dipole integrations.
+! Version 7.2  Feb 5, 2010.         David Myer added support for finite dipole length.
+! Version 7.1  November 5, 2009.    Fixed some bugs in PreComputePotCoeffs that affected the curvature terms
+!                                   of the spline interpolation coefficients. Thanks to James Gunning for identifying this.
+!                                   Also, I finally modified the interp coeff arrays so that only layers with receivers are stored, 
+!                                   resulting in a huge savings in unused memory.  The Canonical_RealImag_BxEyEz example 
+!                                   inversion now uses only 5MB instead of 85MB.
+! Version 7.0  October 20, 2009.    Rearranged the code to encapsulate subroutines into a Fortran module.
+! Version 6.7  May 8, 2009.         A few minor changes to reduce compiler temporary array allocations.
+! Version 6.6  December 22, 2008.   Fixed a bug in phase lead code. Changed a few intrinsics to use F2003 
+!                                   standard.  A few other minor changes.                                   
+! Version 6.5  November 22, 2008.   Added phaseConvention parameter so that 
+!                                   the phase lag or lead convention can be specified.
+! Version 6.4  September 17, 2008.  Fixed an allocation error in PreComputePotCoeffs that sometimes resulted 
+!                                   in lots of extra spline interpolations and wasted CPU time.
+! Version 6.3  June 17, 2008.       Fixed sign error in jz_ved_kx kernel function.
+! Version 6.2  May, 20, 2008.       Rearranged computations and array shapes for derivative comp speedup. 
+!                                   Added spline interpolation for derivatives. Added test-drive function to
+!                                   determine range of lambda for interpolation.
+! Version 6.1  April 18, 2008.      Reformatted source for compatibility with g95 and gfortran free compilers. 
+! Version 6.0  March 14, 2008.      Added model response derivatives with respect to conductivity of
+!                                   each layer, to use for Jacobians for 1D inversion.  Currently
+!                                   these do not support the spline interpolation speedup. 
+! Version 5.3  February 29, 2008.   Added optional spline interpolation for major 
+!                                   speedup when modeling many layers, many receivers.
+! Version 5.2  February 26, 2008.   Restructured filter modules, added new HT and CT filters                              
+! Version 5.1  December 14, 2007.   Modified all routines for exp(-iwt) time dependence
+! Version 5.0  June 22, 2007.       Option to output fields in (kx,y,z) domain for 2.5D modeling.
+!                                   Uses my own sine/cosine transform digital filters created using
+!                                   a similar technique to F.N. Kong, Geophys. Prospect., 2007.
+! Version 4.0  June 14, 2007.       N-layer version for arbitrary dipole orientation.
+! Version 3.0  June 12, 2007.       N-layer version for horizontal dipole.
+! Version 2.0  June 1, 2007.        3 layer version for horizontal dipole. 
+! Version 1.0  May 25, 2007.        2 layer version for horizontal dipole.  

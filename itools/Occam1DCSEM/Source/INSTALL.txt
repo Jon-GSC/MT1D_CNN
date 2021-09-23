@@ -1,0 +1,116 @@
+Below are instructions for installing the Occam1DCSEM and
+Dipole1D programs on Unix based systems and Windows systems.
+
+Kerry Key
+Scripps Institution of Oceanography
+
+===========================
+Installing on UNIX Systems:
+===========================
+ 
+-------------
+Requirements:
+-------------
+
+a) Fortran compiler.  Gfortran is a free Fortran compiler available
+for many platforms.  Occam1DCSEM and Dipole1D have been tested extensively on
+the Gfortran compiler and Intel's ifort compiler. Both codes use some modern Fortran 
+constructs (up to the 2003 standard), so you will need to have a recent version of the
+Fortran compiler.
+
+b) The "make" utility.  This is standard on many unix systems.
+If you are working on an Apple Mac OS X computer (my personal choice),
+you will need to have installed Apple's "Developer Tools" (aka X-code), which is
+an optional install available on your OS X installation disk, or can be freely 
+downloaded from Apple's Developer Center website.
+
+c) The LAPACK and BLAS Libraries
+
+Occam1DCSEM uses two routines from the LAPACK/BLAS libraries.   If you have your own
+precompiled and machine optimized versions of these libraries, we suggest you use them. 
+If not, you can download them for free from http://www.netlib.org/lapack/.  To compile 
+these routines in a Unix environment, go to the folder lapack-3.1.2.   In that folder, you will 
+need to edit the file make.inc to specify your Fortran compiler.  Then open a terminal.  
+"cd" to the lapack folder and type "make blaslib", then type "make lapacklib", and after 
+a lengthy compilation process, LAPACK should be ready to go. You should see the files 
+libblas.a and liblapack.a in the lapack-3.1.2 folder.
+
+ 
+----------------------------------------
+How to compile OCCAM1DCSEM and DIPOLE1D:
+----------------------------------------
+ 
+In the /Source folder, you may need to edit the file Makefile to specify your Fortran compiler.
+For example, to use gfortran, make sure  "FC = gfortran" line is uncommented (hint: the # symbol is
+the comment sign in Makefiles).  You will also need to make sure the variable "LIBS" points to the 
+LAPACK and BLAS libraries you made above, or else to your own LAPACK and BLAS libraries. 
+On Mac OS X, you can instead use  "LIBS = -framework veclib", which uses the built in LAPACK and 
+BLAS that are installed automatically with the Apple's Xcode Developer's tools 
+(assuming you've installed them). 
+
+To make OCCAM1DCSEM and DIPOLE1D, just open a terminal, "cd" to the "Source" folder and 
+type "make all".  
+
+You're done, enjoy!
+
+-----------------------------
+Calling Dipole1D from MATLAB:
+-----------------------------
+ 
+David Myer has created the necessary "mex" file required for calling Dipole1D from the Matlab
+command line.  This is very useful since it combines the ease of working in Matlab with the speed of
+running Dipole1D in Fortran.   Here's how to get it working on your Unix system.  First, edit the
+Makefile to variable MATLABPATH to point to the root directory of your Matlab application.  On my OS
+X machine this is simply:
+
+MATLABPATH = /Applications/MATLAB_R2010a.app
+
+Then set the MATEXT variable to the mex extension name for your platform.  To find out what this is,
+type "mexext" in the matlab command window.  On my OS X machine the extension is "mexmaci64", so the
+makefile has the line:
+
+MATEXT = mexmaci64
+
+Next you need to make sure the path is correct for the include statement listed near the top of the file mexDipole1D.f90.  Mine uses this on line 32:
+
+#include "/Applications/MATLAB_R2010a.app/extern/include/fintrf.h"
+
+
+To compile the mex file, open a terminal, cd to the Occam1DCSEM/Source directory and type 
+"make mexDipole1D". 
+
+If you are not using OS X, you might need to change some of the arguments in the 
+makefile for the command:
+
+mexDipole1D:$(MEXDIP)
+	    $(FC) $(MEXlibs) -DMATLAB_MEX_FILE -undefined dynamic_lookup -bundle -o $@.$(MATEXT) $(MEXDIP) 
+	
+Once you have the compiled file mexDipole1D.mexmaci64, make sure it is located inside a folder that is on Matlab's
+search path (or add the Occam Source folder to Matlab's search path).
+
+To learn how to use the mex wrapper, just type "help Dipole1D" at the Matlab command prompt.
+
+Then send an email to David Myer (dmyer@ucsd.edu) letting him know you are eternally grateful for
+his coding efforts :)
+
+
+==============================
+Installing on Windows Systems:
+==============================
+
+Instructions from David Myer:
+
+1) Make sure you have Lapack installed. If not, go to the LaPack/BLAS windows distribution website
+(http://icl.cs.utk.edu/lapack-for-windows/) and download the latest version.  Install it according
+to its instructions and keep track of where it installs.  On my system, the installation folder is
+c:\Program Files\LAPACK and the libraries are installed in c:\Program Files\LAPACK\lib\win32
+ 
+2) Open the Occam1DCSEM.sln Visual Studio solution file.  Select the "Occam1DCSEM" project in the
+solution explorer pane, right click, and bring up the "Properties" dialog.  In the Configuration
+pulldown, select "All Configurations".  In the left-hand list, click the plus by "Linker" then
+select the "General" properties page.  On this page, set the "Additional Library Directories"
+property to the library folder for LAPACK.  For example, on my system this entry reads: "c:\Program
+Files\LAPACK\lib\win32".  Press "OK" to save settings.
+ 
+3) Build.  Voila!
+ 
