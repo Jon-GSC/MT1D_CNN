@@ -5,7 +5,7 @@
 
 ### Download link-note:
 
-* The aim of this inversion study is to train a neural network model for retriving subsurface resistivity distribution using deep learning framework. The code has been tested without issue in PyCharm IDE.   
+* The aim of this inversion study is to train a neural network model for retriving subsurface resistivity distribution using deep learning framework. The code has been tested without any issue in PyCharm IDE.   
 
 ### Requirements: 
 
@@ -24,11 +24,11 @@
 
    3. _forWeb2_Model_training.py_ is used to create the model, and predict the resistivity of evaluation set. All of the data should be saved in one folder, code will run through each of the data and save all of the results in same folder.
 
-   4. _forWeb3_Prediction.py_ is used for predicting of real '.edi' data, and plotting figures. The 'plc002.edi' in _edi_data_ is real data for testing purpose. User can add edi file to the folder _edi_data_ without other change. The output will be save in folder _save_plot_0_, the filename of resistivity is '_All_resistivity.csv_'.
+   4. _forWeb3_Prediction.py_ is used for predicting of real '.edi' data, and plotting figures. The 'plc002.edi' in _edi_data_ is real data for testing purpose. User can add '.edi' files to the folder _edi_data_ without other change. The output will be save in folder _save_plot_0_, the predicted resistivity is saved in '_All_resistivity.csv_'.
 
-   5. If user wants to validate the code, one can create some synthetic models and save the forward results as 'edi' format, then load into model by operating the step 4.
+   5. If user wants to validate the code, one can create some synthetic models and save the forward results as '.edi' format, then load into model by operating the step 4.
    
-   For pilot running, user does not need change any parameters, just run the code files in step 2,3,4. The code should run without any error if environment setting is correct. Please contact at following email address if any bugs popup.
+   For pilot running, user does not need change any parameters, just run the code files in steps 2,3,4. The code should run without any error if environment setting is correct. Please contact at following email address if any bugs popup.
 
 
 ### Hardware tested: 
