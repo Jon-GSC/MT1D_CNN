@@ -28,13 +28,13 @@ mt_obj = MT(os.path.join(current_path,edi_file))
 occam1d_path = os.path.join(current_path,'itools/Occam1DCSEM/Source/OCCAM1DCSEM')  # path to Occam1D open source
 #-----------------------------------------------------------------------------------------------------------------------
 
-n_layers = 49     #input layers
-input_size = 128  #number of frequency
+n_layers = 49      #input layers
+input_size = 128   #number of frequency
 
-epochs = 150      #maximum iteration
+epochs = 150       #maximum iteration
 batch_size = 32    #batch size
 
-version = 1          # test version
+version = 1          # test version number
 
 #-----------------------------------------------------------------------------------------------------------------------
 t_start = time.time()
@@ -129,7 +129,7 @@ if True:   # prediction
     for i, idx in enumerate(ids_valid[offset:offset+max_images]):
         ax2 = axs2[int(i / grid_width), i % grid_width]
         ax2.loglog(train_data0[idx],freq0, 'g', linewidth=0.8)
-        ax2.set_title(str(idx), color='red')  # .z
+        ax2.set_title(str(idx), color='red')  
         ax2.grid(linestyle='-')
     plt.savefig(os.path.join(savepath,f'plotD_{idx}.png'))
 
