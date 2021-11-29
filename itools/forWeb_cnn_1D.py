@@ -22,8 +22,8 @@ from keras.layers.pooling import MaxPooling1D
 from keras.losses import binary_crossentropy
 import tensorflow as tf
 
-CHANNEL_AXIS = 2
-input_size = 256
+CHANNEL_AXIS = 2   # N/A, did not use in the version
+input_size = 256  # default input size
 #-----------------------------------------------------------------------------------------------------------------------
 #Params and helpers
 def exp10(my_list):
