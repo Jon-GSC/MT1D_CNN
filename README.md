@@ -1,6 +1,5 @@
 # MT1D_CNN1D inversion study with CNN model.
 
-## 1D MT forward modeling with Occam1D
 
 ### Download link-note:
 
