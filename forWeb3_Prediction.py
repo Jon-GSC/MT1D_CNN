@@ -1,4 +1,5 @@
 # this part is an example to load model for real 'edi' data predicting, and plot figures of result.
+# If found any bugs, please contact jon.liu@canada.ca
 import os
 import time
 import numpy as np
@@ -19,10 +20,10 @@ folder_mask = 'mask'
 occam1d_path = os.path.join(current_path,'itools/Occam1DCSEM/Source/OCCAM1DCSEM')  # path to Occam1D
 #-----------------------------------------------------------------------------------------------------------------------
 
-n_layers = 49
-input_size = 128
+n_layers = 49  # number of layers
+input_size = 128  # size of input
 
-version = 1
+version = 1   # model version number
 
 edi_folder = 'edi_data/'  # real data file, user can add edi file to list.
 save_plot_0 = 'save_plot_0'   # output folder
