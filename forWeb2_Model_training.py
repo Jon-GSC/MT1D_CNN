@@ -105,9 +105,9 @@ if True:   # model training.
 if True:   # prediction
     model = load_model(save_model_name, custom_objects={'rmse_m':un.rmse_m})  #
     preds_valid = un.predict_result(model,[x_valid0,x_valid1],output_size)
-    offset = 0
-    max_images = 32
-    grid_width = 8
+    offset = 0   #for display different predicted results
+    max_images = 32  #maximum number of output
+    grid_width = 8  #image number each row
     Depth = np.arange(len(y_valid[0]))
     freq0 = np.logspace(np.log10(frequency[0]), np.log10(frequency[-1]), input_size)
     grid_height = int(max_images / grid_width)
