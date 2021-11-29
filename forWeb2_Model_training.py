@@ -87,7 +87,7 @@ if True:   # model training.
     uconv0 = Dense(output_size, activation='relu', name='predictions')(combined)
     uconv0 = Reshape((uconv0.shape[1], 1))(uconv0)
     model = Model([model0.input, model1.input], uconv0)
-    c = optimizers.Adam(lr=0.01)
+    c = optimizers.Adam(lr=0.01)   #lr: adam learning rate
     model.compile(loss=un.rmse_m, optimizer=c, metrics=[un.rmse_m])
     early_stopping = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
     model_checkpoint = ModelCheckpoint(save_model_name, monitor='val_loss',
@@ -100,7 +100,7 @@ if True:   # model training.
                         callbacks=[model_checkpoint, reduce_lr, early_stopping],
                         verbose=2)
     pd.DataFrame(history.history).to_csv(f'TrainHistory1_{version}.csv')  # save history1
-    # Training 2
+    #
 
 if True:   # prediction
     model = load_model(save_model_name, custom_objects={'rmse_m':un.rmse_m})  #
@@ -148,7 +148,7 @@ if True:   # prediction
     ocm.read_model_file(os.path.join(savepath,'Model1D'))
     for i, idx in enumerate(ids_valid[offset:offset+max_images]):
         ax4 = axs4[int(i / grid_width), i % grid_width]
-        plot_depth = ocm.model_depth[1:] / 1
+        plot_depth = ocm.model_depth[1:]
         plot_model4 = y_valid[i+offset]
         plot_pred4 =  preds_valid[i+offset]
         line4_1 = ax4.plot(plot_model4[::-1], np.log10(plot_depth[::-1]), color='g', lw=0.8)
