@@ -39,7 +39,7 @@
 * jon.liu@canada.ca
 
 
-### Acknowledgments
+### Acknowledgments:
 
 * MT1D_CNN used open source codes and library from github, google, kaggle, and open-sourced geophysical inversion packages mtpy and occam1d. Please cite the related references in your publications.
  
