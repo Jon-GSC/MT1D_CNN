@@ -1,4 +1,4 @@
-# MT1D_CNN inversion study with CNN model.
+# MT1D inversion study with CNN model.
 
 
 ### Download link-note:
