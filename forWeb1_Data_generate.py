@@ -1,4 +1,4 @@
-# Clearup version of data generation:
+# Clearup concise version of data generation:
 #   1. Install open source mtpy:  https://mtpy2.readthedocs.io/en/develop/index.html
 #   2. Need download open-source package Occam1D and set the running path.
 #   If found any bugs, please contact jon.liu@canada.ca
@@ -47,3 +47,4 @@ if True:   #create the training dataset for cnn model
         shutil.move(os.path.join(savepath,save_startup_fn), os.path.join(savepath_m,save_startup_fn))
         shutil.move(os.path.join(savepath,save_appres_fn+'_0.resp'), os.path.join(savepath_d,save_appres_fn+'_0.resp'))
     print(f'Done: {n_sample} samples have been generated!')
+    
