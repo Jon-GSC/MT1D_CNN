@@ -31,7 +31,7 @@
 
 ### Hardware tested: 
 
-* HP-7920 workstation: 56core CPU; 64G memory; one GPU Nvidia Quadro P5000.
+* HP-7920 workstation: 56core CPU; 64G memory; one Nvidia Quadro P5000 GPU.
 
 
 ### Contact: 
