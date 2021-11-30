@@ -1,5 +1,6 @@
 # this part is an example to load model for real 'edi' data predicting, and plot figures of result.
 # If found any bugs, please contact jon.liu@canada.ca
+
 import os
 import time
 import numpy as np
@@ -92,7 +93,7 @@ if True:
         res_all[slst0[idx]] = plot_pred
         fig1, axs1 = plt.subplots(1, 1, figsize=(9, 15))
         line1_1 = axs1.plot(plot_pred[::-1], np.log10(plot_depth[::-1]), color='b', lw=1.5)
-        line1_1[0].set_drawstyle('steps')    #
+        line1_1[0].set_drawstyle('steps')    
         line1_1[0].set_linestyle('-')
         axs1.set_xlabel(r'$log(\rho)$'+ ' $(\Omega m)$')
         axs1.set_ylabel('log(Depth) (m)')
@@ -101,4 +102,4 @@ if True:
         axs1.grid(linestyle='--')
         plt.savefig(os.path.join(savepath0, f'cnn_res_{slst0[idx]}.png'))
         plt.clf()
-    res_all.to_csv(savepath0 + '/All_resistivity.csv')
+    res_all.to_csv(savepath0 + '/All_resistivity.csv')   # save all predicted resistivity model
