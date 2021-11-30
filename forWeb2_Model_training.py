@@ -25,7 +25,7 @@ current_path = os.getcwd()
 fold_train = 'train_unet'
 edi_file = 'edi_data/plc002.edi'
 mt_obj = MT(os.path.join(current_path,edi_file))
-occam1d_path = os.path.join(current_path,'itools/Occam1DCSEM/Source/OCCAM1DCSEM')  # path to Occam1D open source
+occam1d_path = os.path.join(current_path,'itools/Occam1DCSEM/Source/OCCAM1DCSEM')  # path to Occam1D open source, need edit if different folder path
 #-----------------------------------------------------------------------------------------------------------------------
 
 n_layers = 49      #input layers
@@ -34,7 +34,7 @@ input_size = 128   #number of frequency
 epochs = 150       #maximum iteration
 batch_size = 32    #batch size
 
-version = 1          # test version number
+version = 1         #version number
 
 #-----------------------------------------------------------------------------------------------------------------------
 t_start = time.time()
@@ -87,7 +87,7 @@ if True:   # model training.
     uconv0 = Dense(output_size, activation='relu', name='predictions')(combined)
     uconv0 = Reshape((uconv0.shape[1], 1))(uconv0)
     model = Model([model0.input, model1.input], uconv0)
-    c = optimizers.Adam(lr=0.01)   #lr: adam learning rate
+    c = optimizers.Adam(lr=0.01)   #lr is adam learning rate
     model.compile(loss=un.rmse_m, optimizer=c, metrics=[un.rmse_m])
     early_stopping = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
     model_checkpoint = ModelCheckpoint(save_model_name, monitor='val_loss',
@@ -99,8 +99,7 @@ if True:   # model training.
                         batch_size=batch_size,
                         callbacks=[model_checkpoint, reduce_lr, early_stopping],
                         verbose=2)
-    pd.DataFrame(history.history).to_csv(f'TrainHistory1_{version}.csv')  # save history1
-    #
+    pd.DataFrame(history.history).to_csv(f'TrainHistory1_{version}.csv')  # save history of training convergence
 
 if True:   # prediction
     model = load_model(save_model_name, custom_objects={'rmse_m':un.rmse_m})  #
@@ -112,7 +111,7 @@ if True:   # prediction
     freq0 = np.logspace(np.log10(frequency[0]), np.log10(frequency[-1]), input_size)
     grid_height = int(max_images / grid_width)
 
-    fig1, axs1 = plt.subplots(grid_height, grid_width, figsize=(2 * grid_width, 2 * grid_height))  #plot model
+    fig1, axs1 = plt.subplots(grid_height, grid_width, figsize=(2 * grid_width, 2 * grid_height))  #plot model and predicted results
     for i, idx in enumerate(ids_valid[offset:offset+max_images]):
         plot_model = y_valid[i + offset]
         plot_pred = preds_valid[i + offset]
