@@ -22,8 +22,8 @@ from keras import optimizers
 from itools import forWeb_cnn_1D as un
 
 current_path = os.getcwd()
-fold_train = 'train_unet'
-edi_file = 'edi_data/plc002.edi'
+fold_train = 'train_unet'   #folder for saving datasets
+edi_file = 'edi_data/plc002.edi'    #sample 'edi' file
 mt_obj = MT(os.path.join(current_path,edi_file))
 occam1d_path = os.path.join(current_path,'itools/Occam1DCSEM/Source/OCCAM1DCSEM')  # path to Occam1D open source, need edit if different folder path
 #-----------------------------------------------------------------------------------------------------------------------
