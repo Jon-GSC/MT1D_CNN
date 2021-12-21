@@ -1,4 +1,4 @@
-#functions for cnn training and plot.
+#functions for cnn training and plot (some functions did not used in this version).
 #
 import os
 import numpy as np
