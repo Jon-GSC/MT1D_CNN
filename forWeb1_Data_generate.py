@@ -1,7 +1,7 @@
 # Clearup concise version of data generation:
 #   1. Install open source mtpy:  https://mtpy2.readthedocs.io/en/develop/index.html
 #   2. Need download open-source package Occam1D and set the running path.
-#   If found any bugs, please contact jon.liu@canada.ca
+#   If found any bugs, please contact jon.liu@canada.ca, or leave comments.
 #
 #-----------------------------------------------------------------------------------------------------------------------
 import os
