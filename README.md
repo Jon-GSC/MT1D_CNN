@@ -1,6 +1,6 @@
 # MT1D inversion study with CNN model.
 
-                         *** updated code will be available soon ***
+  *** updated code will be available soon ***
 
 ### Download link-note:
 
