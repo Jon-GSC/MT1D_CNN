@@ -38,8 +38,7 @@
 
 ### Contact: 
 
-* jon.liu@canada.ca
-* Geological Survey of Canada, 3303-33 Street NW, Calgary, AB
+* jon.liu@nrcan-rncan.gc.ca
 
 
 ### Acknowledgments:
