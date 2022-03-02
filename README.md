@@ -1,5 +1,6 @@
 # MT1D inversion study with CNN model.
 
+                         *** updated code will be available soon ***
 
 ### Download link-note:
 
@@ -15,9 +16,7 @@
 
 
 ### Instruction: 
-   
-   *** updated code will be available soon ***
-   
+     
    1. The three main python codes and _/itools_, _/edi_data_ need be save in same folder. Before run the code: a). Install open-source mtpy: https://pypi.org/project/mtpy/. b). Download and setup open-source MT-Occam1D: https://marineemlab.ucsd.edu/Projects/Occam/1DCSEM/index.html (optional), the enclosed Occam1DCSEM EXE in _/itools_ has been tested in Ubuntu operating system. User might need compile the Occam Fortran source for different operating environments.
 
    2. _forWeb1_Data_generate.py_ is used to generate the training dataset, and saved automatically in two folders: _data_ and _mask_. Some parameters at the beginning of code are default, user can change it as wish.
