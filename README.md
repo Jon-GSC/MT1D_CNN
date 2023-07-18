@@ -44,7 +44,10 @@
 
 * MT1D_CNN used open source codes and library from github, google, kaggle, and open-sourced geophysical inversion packages mtpy and occam1d. Please cite the related references in your publications.
  
- 
- 
+### Citation: 
+
+* Liu, X.; Craven, J.A.; Tschirhart, V. Retrieval of Subsurface Resistivity from Magnetotelluric Data Using a Deep-Learning-Based Inversion Technique. Minerals 2023, 13, 461. https://doi.org/10.3390/min13040461.
+
+  
 ![plotMzig_94](https://user-images.githubusercontent.com/39324742/134573289-c75ca6e1-f622-4fe1-8d02-2e4cfbf67c3a.png)
 
