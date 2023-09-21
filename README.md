@@ -1,7 +1,5 @@
 # MT1D inversion study with CNN model.
 
-  *** updated code will be available soon ***
-
 ### Download link-note:
 
 * The aim of this inversion study is to train a neural network model for retriving subsurface resistivity distribution using deep learning framework. The code has been tested without any issue in PyCharm IDE.   
