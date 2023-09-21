@@ -980,7 +980,7 @@ def blur_image(im, n, ny=None) :
     improc = scipy.signal.convolve(im,g, mode='same')
     return improc
 
-def savgol_smooth_Jon(input0):
+def savgol_smooth_Jon(input0): # testing only
     from scipy.signal import savgol_filter
     iwin0 = [5,7]
     iorder = 3
